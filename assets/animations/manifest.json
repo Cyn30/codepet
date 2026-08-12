@@ -1,0 +1,15 @@
+{
+  "format_version": 1,
+  "frame_width": 128,
+  "frame_height": 128,
+  "columns": 8,
+  "rows": 6,
+  "actions": {
+    "idle": 0,
+    "walking": 1,
+    "running": 2,
+    "eating": 3,
+    "affection": 4,
+    "sleeping": 5
+  }
+}
