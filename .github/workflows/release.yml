@@ -1,0 +1,39 @@
+name: Build desktop releases
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-14
+            artifact: dist/CodePet-macOS.dmg
+          - os: windows-latest
+            artifact: dist/CodePet-Windows.zip
+          - os: ubuntu-latest
+            artifact: dist/CodePet-Linux.tar.gz
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -e ".[desktop,packaging]"
+      - run: python -m unittest discover -s tests -v
+      - run: python scripts/build_desktop.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: CodePet-${{ runner.os }}
+          path: ${{ matrix.artifact }}
+      - uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: ${{ matrix.artifact }}
