@@ -45,7 +45,7 @@ Commits, pull requests, and new repositories become XP, coins, bond points, and
 occasional food drops.
 
 It uses a normal native desktop window—the same broad application pattern used by
-interactive companions such as Bongo Cat—but its artwork, game rules, and code are
+interactive companions, while its artwork, game rules, and code are
 original. It does **not** monitor your keyboard and does **not** read your source code.
 
 ## Highlights
