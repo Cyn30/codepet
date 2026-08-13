@@ -1,77 +1,227 @@
 # CodePet 中文指南
 
-**坚持编程，养大一个朋友。**
+<p align="center">
+  <strong>坚持编程，养大一个朋友。</strong>
+</p>
 
-CodePet 是一个支持 macOS、Windows 和 Linux 的开源桌面宠物。宠物运行在透明桌面窗口中，可以趴在 macOS 菜单栏下方休息、沿屏幕行走、回到笼子、进食和通过白色 emoji 气泡表达情绪。它会根据用户真实的 GitHub 活动成长，但不会监听键盘，也不会读取源代码。
+<p align="center">
+  一只生活在桌面上的像素宠物。它会回应你的照顾，并随着真实 GitHub 活动成长。
+</p>
 
-[返回英文主 README](README.md)
+<p align="center">
+  <a href="https://github.com/Cyn30/codepet/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Cyn30/codepet/actions/workflows/ci.yml/badge.svg"></a>
+  <img alt="公开测试版" src="https://img.shields.io/badge/status-public%20alpha-f59e0b">
+  <img alt="Python 3.10+" src="https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white">
+  <img alt="macOS、Windows、Linux" src="https://img.shields.io/badge/platform-macOS%20%7C%20Windows%20%7C%20Linux-6b7280">
+  <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-22c55e"></a>
+  <a href="https://github.com/Cyn30/codepet/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/Cyn30/codepet?style=social"></a>
+</p>
 
-> 当前版本属于 public alpha：主要玩法、透明桌宠、双宠物家庭、商店、GitHub 奖励、旧存档迁移和安装包构建流程均已实现。发布稳定版之前，仍然需要在每个目标操作系统的真实设备上测试安装包。
+<p align="center">
+  <img src="website/public/og.png" alt="CodePet 像素桌面宠物" width="820">
+</p>
 
-## 它是怎样成为桌面应用的？
+<p align="center">
+  <a href="https://github.com/Cyn30/codepet/releases"><strong>下载 CodePet</strong></a>
+  ·
+  <a href="README.md">English README</a>
+  ·
+  <a href="https://github.com/Cyn30/codepet/issues/new">报告问题</a>
+  ·
+  <a href="CONTRIBUTING.md">参与贡献</a>
+</p>
 
-Bongo Cat 一类桌宠并不是在桌面壁纸上作画。它们运行一个本机应用，由应用创建以下组件：
+> **公开测试版：**桌面宠物、自然行为、双宠物家庭、商店、GitHub 奖励、旧存档
+> 迁移和跨平台构建流程已经实现。每次发布前仍应在真实设备上测试安装包。如果
+> Releases 页面暂时没有安装包，请使用下方的源码运行方式。
 
-1. 无边框透明窗口，用来绘制宠物。
-2. 窗口置顶设置，让宠物显示在其他窗口上方。
-3. 系统托盘或菜单栏图标，用来显示、隐藏、打开设置和退出。
-4. 动画计时器，用来切换动作帧和改变位置。
-5. 本地存档，用来保存宠物状态。
-6. 安装包，把运行环境、Qt、代码和美术资源一起交付给用户。
+## 为什么做 CodePet？
 
-CodePet 使用 PySide6/Qt 实现窗口和界面，使用 PyInstaller 生成本机应用。用户下载预构建 Release 后不需要自行安装 Python。
+CodePet 把持续编程变成一段能直接看见的小小陪伴。宠物会休息、散步、短跑、
+进食、撒娇，并通过 emoji 气泡表达心情。Commit、pull request 和创建 repository
+会转化成经验值、金币、亲密度以及偶尔掉落的食物。
 
-CodePet 使用原创二维像素动作表，而不是复制 Bongo Cat 或《星露谷物语》的素材。二维像素画的轮廓更清晰、资源更轻、动作更容易保持一致，也更适合社区继续添加皮肤和帧动画。
+它采用 Bongo Cat 等互动桌宠常用的本机应用模式：无边框透明窗口、置顶显示和
+系统托盘控制，但美术、玩法和代码均为原创。CodePet **不会监听键盘，也不会读取
+你的源代码**。
 
-## 已有功能
+## 核心亮点
 
-- 没有矩形背景的透明可拖动桌宠
-- 6 个品种均有独立正式图集，支持待机、走路、跑步、进食、撒娇和睡觉六组八帧动画
-- 猫狗各自独立的自然行为调度，行为有最长时限、近期状态记忆，不使用随机瞬移
-- 动作循环边界切换、渐进加减速、提前刹车转身和进食后休息期
-- 使用白色 emoji 气泡表达心情和需求
-- 猫和狗两类宠物，共 6 个原创品种皮肤
-- 每个家庭最多同时养 2 只宠物
-- 等级越高，升级所需经验越多
-- 从“初识”到“灵魂伙伴”的 5 个亲密度段位
-- 饥饿、快乐、精力、寿命、连续打卡和离线时间衰减
-- 家庭金币、食物库存和商店
-- 按猫狗现实饮食偏好设计的亲密度变化
-- GitHub commit、pull request 和创建 repository 奖励
-- 奖励确定性计算和事件去重
-- 本地存档，不含遥测和键盘监听
-- 应用内 GitHub Device Flow 登录，并把凭据保存在系统钥匙串
-- 为开发者保留 GitHub CLI 和环境变量 token 备用方式
+| | 功能 | 实际体验 |
+| --- | --- | --- |
+| 🐾 | 本机桌面宠物 | 透明、无边框、可拖动、置顶显示的宠物窗口 |
+| 🎞️ | 自然像素动画 | 每个品种都有待机、走路、跑步、进食、撒娇和睡觉动画 |
+| 🌿 | 贴近真实的行为 | 渐进加减速、停下休息、进食消化期，不会随机瞬移 |
+| 💻 | GitHub 驱动成长 | Commit、PR 和新 repository 会带来游戏奖励 |
+| 💛 | 照顾与亲密度 | 饥饿、快乐、精力、五段亲密度、心情、食物和陪玩 |
+| 🐱 | 猫和狗 | 首批 6 个品种，每个家庭最多同时养 2 只 |
+| 🏠 | 笼子与放风 | 可以自由活动、休息、短跑，也可以回到笼子 |
+| 🔒 | 本地优先隐私 | 本地存档、系统钥匙串、无遥测、无键盘监听 |
 
-## 普通用户安装步骤
+## 安装
+
+预构建版本已经包含 Python、Qt 和美术资源，普通用户不需要安装开发工具。
 
 ### macOS
 
-1. 打开 GitHub 仓库的 **Releases** 页面。
-2. 下载 `CodePet-macOS.dmg`。
-3. 双击打开下载的 dmg。
-4. 把 `CodePet.app` 拖入 **Applications（应用程序）** 文件夹。
-5. 从应用程序文件夹打开 CodePet。
+1. 打开 [Releases 页面](https://github.com/Cyn30/codepet/releases)。
+2. 从最新版本下载 `CodePet-macOS.dmg`。
+3. 打开磁盘映像，把 `CodePet.app` 拖入 **Applications（应用程序）**。
+4. 从应用程序文件夹启动 CodePet。
 
-如果未签名的 alpha 版本被 macOS 阻止，请在应用程序文件夹中右键 CodePet，选择“打开”，然后再次确认。正式公开发布时，维护者应该使用 Apple Developer ID 对应用签名并进行 notarization，而不是长期要求用户绕过 Gatekeeper。
+Alpha 安装包可能尚未完成 Apple notarization。如果 macOS 阻止启动，请在应用程序
+文件夹中右键 CodePet，选择“打开”，并且只在确认文件来自本仓库时继续。正式稳定
+版本应使用 Apple Developer ID 签名并完成 notarization。
 
 ### Windows
 
-1. 打开仓库的 **Releases** 页面。
-2. 下载 `CodePet-Windows.zip`。
-3. 完整解压 zip。
-4. 打开解压后的 `CodePet` 文件夹。
-5. 运行 `CodePet.exe`。
+1. 从 [Releases 页面](https://github.com/Cyn30/codepet/releases) 下载 `CodePet-Windows.zip`。
+2. 完整解压压缩包。
+3. 打开解压后的 `CodePet` 文件夹。
+4. 运行 `CodePet.exe`。
 
-不要只把 exe 单独移动出去，因为旁边的 Qt 文件也是应用的一部分。
+请保留整个文件夹，不要单独移动 exe；旁边的 Qt 库也是应用的一部分。
 
 ### Linux
 
-1. 从 **Releases** 下载 `CodePet-Linux.tar.gz`。
-2. 解压文件。
+1. 从 [Releases 页面](https://github.com/Cyn30/codepet/releases) 下载 `CodePet-Linux.tar.gz`。
+2. 解压压缩包。
 3. 运行 `CodePet/CodePet`。
 
-Wayland 下的置顶窗口行为取决于桌面合成器；目前 X11 的透明置顶体验更加一致。
+目前 X11 的透明置顶窗口体验最一致；Wayland 的行为取决于桌面合成器。
+
+## 启动后的前三分钟
+
+1. 选择宠物名字、物种和品种。
+2. 设置 14 至 3,650 天的寿命。
+3. 点击 **Adopt**。
+4. 左键点击桌面宠物相当于抚摸，每次增加 1–2 点亲密度。
+5. 右键宠物可以选择休息、散步、短跑、恢复自然活动、回笼、同步 GitHub 或隐藏。
+6. 打开 **CodePet Home** 喂食、进入商店、切换当前宠物或领养第二只宠物。
+
+GitHub 奖励发给当前选中的宠物；金币、食物和已处理事件属于家庭共享，因此同一个
+GitHub 事件不能被两只宠物重复领取。
+
+## 自然行为，而不是随机换动作
+
+CodePet 不会在每个计时器 tick 随机选择姿势。每只宠物会经历有时间边界的行为
+阶段：观察四周、慢慢散步、短距离奔跑、逐渐减速，然后窝着休息。狗更偏好持续
+散步，猫更偏好长时间休息和短时爆发。近期状态记忆会减少连续重复，而且任何
+状态都不会无限持续。
+
+位移按照真实经过时间计算，而不是每帧固定移动。散步约为每秒 10–16 像素，奔跑
+约为每秒 27–38 像素，所以走几步不会突然横穿整个屏幕。宠物会在屏幕边缘前刹车，
+停顿后转身；动作会在完整循环后切换；进食后必定先进入休息期。
+
+## 安全连接 GitHub
+
+推荐直接使用桌面应用内置登录：
+
+1. 打开 **CodePet Home**。
+2. 点击 **Connect GitHub**。
+3. CodePet 会复制一次性验证码，并在浏览器中打开 GitHub。
+4. 输入验证码，确认只读权限。
+5. 返回 CodePet，点击 **Sync GitHub**。
+
+CodePet 使用 GitHub Device Flow。授权凭据保存在 macOS Keychain、Windows
+Credential Locker 或 Linux 桌面钥匙串中，不会写入 `save.json`、网站或仓库。
+
+### CodePet 会读取什么？
+
+| 数据 | 用途 |
+| --- | --- |
+| GitHub 用户 ID 和用户名 | 确认当前授权用户 |
+| Commit ID 和作者关系 | 统计用户近期 commit |
+| Pull request contribution ID | 为近期 PR 发放奖励 |
+| Repository contribution ID | 为新建 repository 发放奖励 |
+
+GitHub App 只有 Metadata、Contents 和 Pull requests 的只读权限。Contents 权限在
+技术上允许读取 repository 数据，但 CodePet 的 GraphQL 查询不会请求文件内容、
+diff、源代码、commit message、Issue 文本或 secret。只有用户和 GitHub App 安装
+都被允许访问时，私有活动才可能被统计。
+
+### 开发者备用方式
+
+也可以安装 [GitHub CLI](https://cli.github.com/) 并运行：
+
+```bash
+gh auth login
+```
+
+或者使用细粒度、只读的开发 token 启动 CodePet：
+
+```bash
+export GITHUB_TOKEN="github_pat_your_token_here"
+codepet-desktop
+```
+
+PowerShell：
+
+```powershell
+$env:GITHUB_TOKEN="github_pat_your_token_here"
+codepet-desktop
+```
+
+只选择希望统计的 repository，并只授予 Metadata、Contents 和 Pull requests 读取
+权限。不要把真实 token 放进源代码、Issue、截图、commit 或文档。
+
+## GitHub 奖励循环
+
+奖励采用确定性计算：同一个 GitHub 事件 ID 永远得到相同结果。已处理事件保存在
+本地，因此重复同步不会重复领取。
+
+| GitHub 活动 | 经验值 | 金币 | 亲密度 | 食物 |
+| --- | ---: | ---: | ---: | --- |
+| Commit | 8–15 | 5–10 | 1–5 | 20% 概率 |
+| Pull request | 12–20 | 5–10 | 2–5 | 无 |
+| 创建 repository | 5–8 | 1–3 | 1–2 | 无 |
+
+每一级需要的经验值都会增加。亲密度段位依次是 **New Friends**、**Familiar**、
+**Friends**、**Best Friends** 和 **Soulmates**。
+
+<details>
+<summary><strong>食物价格与猫狗偏好</strong></summary>
+
+| 食物 | 价格 | 猫的亲密度 | 狗的亲密度 |
+| --- | ---: | ---: | ---: |
+| 猫粮 | 15 | +3 至 +5 | −2 至 0 |
+| 狗粮 | 15 | −2 至 0 | +3 至 +5 |
+| 磨牙骨 | 25 | −3 至 0 | +5 至 +7 |
+| 熟鸡肉 | 35 | +4 至 +7 | +4 至 +7 |
+| 三文鱼 | 45 | +7 至 +10 | +3 至 +6 |
+| 金枪鱼 | 60 | +9 至 +13 | +1 至 +4 |
+| 庆祝大餐 | 100 | +10 至 +14 | +10 至 +14 |
+
+物种倾向明显的食物价格更低，但喂错可能降低亲密度；价格更高的通用食物对猫狗
+都更加安全。
+
+</details>
+
+## 心情、照顾与寿命
+
+- `😊` / `🥰`：快乐，并且被照顾得很好
+- `😴`：精力不足
+- `😟`：饥饿或不开心
+- `😿` / `🥺`：进入需要尽快照顾的阈值
+- `💤`、`🏠`、`🌿`、`✨`：休息、回笼、放风和活动反馈
+
+离线衰减按照有上限的 6 小时时段计算，长时间未打开应用也不会产生无限惩罚。
+没有得到照顾的宠物可能损失有限亲密度，但存档永远不会被删除。达到用户设定的
+寿命后，宠物会成为 **Cherished Memory**，而不是从存档中消失。
+
+## 从设计上保护隐私
+
+- 不进行全局键盘监听
+- 不收集源代码或 commit message
+- 没有遥测或广告 SDK
+- 没有由 CodePet 运营的中转服务器
+- GitHub 权限只读
+- 凭据只保存在操作系统钥匙串
+- 宠物数据保存在 `~/.codepet/save.json`
+- 只有与 CodePet 窗口互动时才会收到鼠标事件
+
+本地存档包含宠物状态、库存、金币、时间和已处理事件 ID；不包含 GitHub token、
+密码、repository 文件或源代码。
 
 ## 从源代码运行
 
@@ -92,237 +242,78 @@ Windows 激活虚拟环境：
 .venv\Scripts\activate
 ```
 
-## 第一次启动
-
-1. 输入宠物名字。
-2. 选择猫或狗。
-3. 选择具体品种。
-4. 设置 14 至 3,650 天的寿命。
-5. 点击 **Adopt**。
-6. 在 CodePet Home 中选择宠物、陪玩、管理食物和进入商店。
-7. 右键桌面宠物，可以选择休息、散步、短跑、恢复自然活动、回笼、同步 GitHub 或隐藏宠物。
-8. 用鼠标左键点击宠物相当于抚摸，每次增加 1–2 点亲密度。
-
-可以在 Home 中领养第二只宠物。GitHub 奖励会发给当前选中的宠物；金币和食物属于家庭共享。这样同一个 GitHub 事件不会被两只宠物重复放大奖励。
-
-## 自然动作与移动逻辑
-
-CodePet 不会在每个计时器 tick 都重新随机选动作。每只猫狗会完整经历一个有
-最短和最长时间的行为阶段，例如观察四周、慢慢散步、短距离奔跑、减速停下或
-窝着休息。调度器会记住近期状态并降低重复概率，而且任何自然状态都不可能
-无限持续。猫更偏好长时间休息和短时爆发，狗更偏好持续散步。
-
-位移按照真实经过时间计算，不依赖电脑帧率。散步速度约为每秒 10–16 像素，
-奔跑约为每秒 27–38 像素，因此走几步不会突然横穿屏幕。速度会渐进变化；靠近
-屏幕边缘时会提前刹车，停顿后再转身。进食完成后必定先休息，并在消化期内
-禁止直接奔跑。画面只会在当前八帧动作完整播放后切换到下一组，避免半途截断
-姿势而产生卡顿或诡异跳变。
-
-## 连接自己的私人 GitHub
-
-CodePet 只会在用户主动点击 **Sync GitHub** 时调用只读 GraphQL API。
-桌宠是本机进程并不妨碍它访问网络：透明窗口负责显示，同一个本机应用可以
-通过 HTTPS 直接调用 GitHub API，所以无需把 token 上传给网页或第三方服务器。
-
-### 方法 A：在应用内连接 GitHub（正式 Release 推荐）
-
-1. 打开 **CodePet Home**。
-2. 点击 **Connect GitHub**。
-3. CodePet 会复制一次性验证码，并在浏览器中打开 GitHub。
-4. 输入验证码，确认只读 GitHub App 权限。
-5. 返回 CodePet，点击 **Sync GitHub**。
-
-CodePet 使用 GitHub Device Flow。得到的用户 token 会保存在 macOS Keychain、
-Windows Credential Locker 或 Linux 桌面钥匙串中，不会写入 `save.json`、网站或
-仓库。Client ID 只是公开的应用标识，可以随安装包发布；Client Secret 绝对不能
-放进桌面应用。
-
-### 方法 B：GitHub CLI
-
-1. 安装 [GitHub CLI](https://cli.github.com/)。
-2. 在终端运行：
-
-   ```bash
-   gh auth login
-   ```
-
-3. 选择 `GitHub.com`。
-4. 选择 HTTPS。
-5. 在浏览器中完成登录授权。
-6. 打开 CodePet Home，点击 **Sync GitHub**。
-
-CodePet 只在同步时向 GitHub CLI 请求当前凭据，不会把凭据写入存档。
-
-### 方法 C：开发阶段使用 fine-grained personal access token
-
-1. 打开 GitHub 的 **Settings > Developer settings > Personal access tokens > Fine-grained tokens**。
-2. Resource owner 选择自己的账户。
-3. 只选择希望 CodePet 统计的仓库。
-4. 只授予只读仓库权限，不要授予写入或管理权限。
-5. 设置合理的过期时间。
-6. 在终端设置 token 并从同一终端启动 CodePet：
-
-   ```bash
-   export GITHUB_TOKEN="github_pat_your_token_here"
-   codepet-desktop
-   ```
-
-PowerShell：
-
-```powershell
-$env:GITHUB_TOKEN="github_pat_your_token_here"
-codepet-desktop
-```
-
-不要把真实 token 粘贴进 README、代码、Issue、截图或 commit。如果 token 泄露，请立即在 GitHub 设置中撤销。
-
-## GitHub 奖励规则
-
-奖励由 GitHub 事件 ID 的哈希确定。同一个事件永远产生同一个结果，已处理的事件 ID 会保存在本地，因此重复同步不会重复获得奖励。
-
-| GitHub 活动 | 经验值 | 金币 | 亲密度 | 食物 |
-| --- | ---: | ---: | ---: | --- |
-| Commit | 8–15 | 5–10 | 1–5 | 20% 概率 |
-| Pull request | 12–20 | 5–10 | 2–5 | 无 |
-| 创建 repository | 5–8 | 1–3 | 1–2 | 无 |
-
-当前 API 查询会读取最近更新的前 50 个可访问仓库的默认分支 commit，以及近期 PR 和 repository contribution。拥有大量仓库的账户，后续版本需要继续增加分页。
-
-## 商店、食物与猫狗偏好
-
-| 食物 | 价格 | 猫的亲密度 | 狗的亲密度 |
-| --- | ---: | ---: | ---: |
-| 猫粮 | 15 | +3 至 +5 | -2 至 0 |
-| 狗粮 | 15 | -2 至 0 | +3 至 +5 |
-| 磨牙骨 | 25 | -3 至 0 | +5 至 +7 |
-| 熟鸡肉 | 35 | +4 至 +7 | +4 至 +7 |
-| 三文鱼 | 45 | +7 至 +10 | +3 至 +6 |
-| 金枪鱼 | 60 | +9 至 +13 | +1 至 +4 |
-| 庆祝大餐 | 100 | +10 至 +14 | +10 至 +14 |
-
-价格更高的通用食物对猫狗都安全；便宜且物种倾向明显的食物，如果喂错可能降低亲密度。每种食物同时有独立的饥饿恢复值。
-
-## 心情气泡与亲密度
-
-小尺寸桌面气泡使用 emoji，让用户不打开管理窗口也能理解宠物状态：
-
-- `😊` 或 `🥰`：快乐并且被照顾得很好
-- `😴`：精力不足
-- `😟`：开始饥饿或不开心
-- `😿` / `🥺`：进入需要尽快照顾的阈值
-- `💤`、`🏠`、`🌿`、`✨`：休息、回笼、自由活动和散步反馈
-
-亲密度段位依次为 New Friends、Familiar、Friends、Best Friends、Soulmates。离线衰减按每 6 小时计算，并设置最大上限，因此长时间没启动不会在一次打开时无限扣除数值。宠物非常饥饿时可能损失有限的亲密度，但程序永远不会删除存档。
-
-## 构建本机安装包
-
-PyInstaller 不能跨系统构建，因此需要在目标操作系统执行：
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -e ".[desktop,packaging]"
-python scripts/build_desktop.py
-```
-
-输出文件：
-
-- macOS：`dist/CodePet-macOS.dmg`
-- Windows：`dist/CodePet-Windows.zip`
-- Linux：`dist/CodePet-Linux.tar.gz`
-
-`.github/workflows/release.yml` 会在三个操作系统分别自动构建。推送类似 `v0.4.0` 的 tag 后，GitHub Actions 会构建并把安装文件加入 GitHub Release。
-
-### 哪些内容应该上传到 GitHub
-
-| 内容 | 源码仓库 | GitHub Release |
-| --- | --- | --- |
-| 解压后的项目源码 | 是 | GitHub 会自动生成源码压缩包 |
-| macOS DMG | 否 | 是，只保留一个带版本号的文件 |
-| Windows ZIP / Linux TAR.GZ | 否 | 是 |
-| 动画预览 GIF | 仅在文档需要展示时可选 | 否 |
-| 本地输出目录、缓存和依赖 | 否 | 否 |
-
-不要把安装包或源码 zip 当作普通仓库文件提交。源码仓库应上传解压后的项目文件，
-安装程序则作为对应版本的 Release 附件。
-
-### 维护者一次性配置：让所有用户一键登录
-
-这是项目发布者要做一次的工作，普通用户不应该自行创建 Client ID。
-
-1. 在你的 GitHub 账号或组织下注册一个 GitHub App。
-2. 开启 **Device Flow**。
-3. 只申请统计活动所需的 Metadata、Contents 和 Pull requests 读取权限，不申请
-   写入或管理权限。
-4. 发布前把公开 Client ID 写入 `src/codepet/build_config.py` 的
-   `PUBLIC_GITHUB_CLIENT_ID`；本地开发也可以设置 `CODEPET_GITHUB_CLIENT_ID`。
-5. 不要把 Client Secret 写入仓库或安装包。
-
-如果发布者还没有配置 Client ID，应用会明确提示；开发者仍可使用 `gh auth login`
-或 `GITHUB_TOKEN`。
-
-## 正式像素动画制作规范
-
-动画状态机与宠物品种美术分离。每个品种使用一张原创的 1024×768 透明图集，
-按照 128×128 划分为 8 列、6 行，依次是待机、走路、跑步、进食、撒娇和睡觉，
-每组严格 8 帧。动作速度统一定义在 `animation.py`，加载器会拒绝尺寸错误的图集，
-不会悄悄显示错位帧。
-
-完整格式见 [assets/animations/README.md](assets/animations/README.md)。要真正去除
-生成式痕迹，应该在 Aseprite 中逐帧重绘并使用洋葱皮检查，统一脚掌锚点、轮廓、
-明暗和运行速度。可以研究其他游戏中的动物运动规律，但不能描摹或复制其精灵、
-配色、轮廓和角色设计。
-
-首批 6 个品种现在都有通过校验的 1024×768 透明图集，共 288 个运行帧。原有静态
-动作表仅作为未来新增品种缺少图集时的防御性回退。修改美术后应运行
-`scripts/validate_animation_atlas.py`，并目视检查生成的 GIF 播放预览。
-
 ## 开发与测试
 
 ```bash
 python -m pip install -e ".[desktop,dev]"
 python -m unittest discover -s tests -v
-ruff check src tests scripts
+ruff check src tests scripts packaging/entrypoint.py
 ```
 
-项目结构：
-
-```text
-domain.py      家庭、宠物、情绪、亲密度、寿命和时间衰减
-catalog.py     食物价格和物种偏好
-rewards.py     GitHub 事件到奖励的确定性映射
-auth.py        GitHub Device Flow 与系统凭据存储
-github.py      只读 GraphQL 活动客户端
-storage.py     原子存档与旧版本迁移
-animation.py   可复用动画片段和状态机
-sprites.py     带校验的品种图集加载器及旧素材回退
-overlay.py     透明桌宠窗口
-dashboard.py   家庭、领养、库存和商店界面
-desktop.py     应用控制器和系统托盘
-packaging/     本机应用打包配置
-scripts/       跨平台 Release 构建入口
-tests/         规则、奖励、GitHub 解析和存档测试
-```
-
-UI 只调用领域操作，不在界面文件中计算价格、偏好或奖励。以后添加新宠物、新食物和新客户端时，应该复用现有规则，而不是写第二套平行逻辑。
-
-生成干净的 GitHub 源码上传包：
+验证所有正式动画图集：
 
 ```bash
-python scripts/package_source.py outputs/CodePet-source.zip
+for atlas in assets/animations/*.png; do
+  python scripts/validate_animation_atlas.py "$atlas"
+done
 ```
 
-该压缩包会排除虚拟环境、网站依赖、构建产物、测试缓存、嵌套 Git 数据和安装包。
-上传时先解压，再把其中内容放到仓库根目录；不要把源码 zip 本身提交进仓库。
+在当前操作系统构建安装包：
 
-## 隐私
+```bash
+python -m pip install -e ".[desktop,packaging]"
+python scripts/build_desktop.py
+```
 
-默认存档为 `~/.codepet/save.json`。存档包含宠物状态、库存、金币、活动日期和已处理 GitHub 事件 ID，不包含 token、密码、源代码、commit message 或仓库内容。
+PyInstaller 不能跨系统构建。Release 工作流会分别在 macOS、Windows 和 Linux
+构建，并把安装包加入带版本号的 GitHub Release。
 
-CodePet 不进行全局键盘或鼠标监听。只有用户主动点击宠物窗口或 CodePet 管理窗口时，应用才会收到鼠标事件。
+<details>
+<summary><strong>项目架构</strong></summary>
 
-## 贡献和许可
+```text
+src/codepet/domain.py      宠物、家庭、心情、亲密度、寿命和衰减
+src/codepet/catalog.py     食物价格和物种偏好
+src/codepet/rewards.py     GitHub 事件到奖励的确定性映射
+src/codepet/auth.py        Device Flow 和系统凭据存储
+src/codepet/github.py      只读 GitHub GraphQL 客户端
+src/codepet/storage.py     原子本地存档和旧版本迁移
+src/codepet/animation.py   动画片段和状态机
+src/codepet/sprites.py     带校验的品种图集加载器
+src/codepet/overlay.py     透明桌面宠物窗口
+src/codepet/dashboard.py   领养、库存、照顾和商店界面
+src/codepet/desktop.py     应用控制器和系统托盘
+packaging/                 本机应用入口和打包配置
+scripts/                   美术校验和 Release 构建工具
+tests/                     规则、奖励、认证、GitHub 和动画测试
+```
 
-提交 PR 前请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)。所有游戏规则修改都必须配套测试，新美术必须是原创且允许重新分发。
+UI 只调用领域操作，不在界面中重复计算价格、奖励或食物偏好。新增客户端和功能应
+复用已有规则，不应再创建平行实现。
 
-代码采用 [MIT License](LICENSE)。原创生成式二维像素素材说明见 [ASSET-LICENSE.md](ASSET-LICENSE.md)。
+</details>
+
+## 路线图
+
+- [ ] 完成 macOS Developer ID 签名和 notarization
+- [ ] 增加更多品种和新的宠物物种
+- [ ] 增加笼子、家具和房间自定义
+- [ ] 增加成就和更丰富的 coding streak 反馈
+- [ ] 为超大型 GitHub 账号改进分页
+- [ ] 扩大 Windows、Linux 和 Wayland 兼容性测试
+
+路线图是计划而不是承诺，欢迎贡献代码和提交具体、可复现的问题。
+
+## 参与贡献
+
+提交 pull request 前请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)。游戏规则修改必须
+包含测试。新美术必须原创并允许重新分发；不能描摹或复制其他游戏的精灵、配色、
+轮廓或角色设计。
+
+如果 CodePet 让编程变得更有趣一点，欢迎为仓库点亮 ⭐。这能帮助更多贡献者和
+桌宠爱好者发现这个项目。
+
+## 许可证
+
+代码采用 [MIT License](LICENSE)。美术许可与来源说明见
+[ASSET-LICENSE.md](ASSET-LICENSE.md)。
